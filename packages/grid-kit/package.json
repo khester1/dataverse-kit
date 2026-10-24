@@ -1,0 +1,89 @@
+{
+  "name": "@dataverse-kit/grid-kit",
+  "version": "0.31.0",
+  "license": "MIT",
+  "description": "Shared, registry-driven grid / detail-list components for Dynamics 365. The default (Fluent UI v8) entry wraps @khester/dynamics-cell-renderers behind one cell-renderer registry usable by both a DetailsList grid and a Grid Customizer; the ./v9 subpath is a Fluent UI v9 skin (a read DataGrid) sharing the same framework-agnostic core.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    },
+    "./v9": {
+      "types": "./dist/v9/index.d.ts",
+      "import": "./dist/v9.esm.js",
+      "require": "./dist/v9.js"
+    },
+    "./lite": {
+      "types": "./dist/lite/index.d.ts",
+      "import": "./dist/lite.esm.js",
+      "require": "./dist/lite.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "prebuild": "cd ../fluent-theme && npm run build && cd ../dynamics-utils && npm run build && cd ../dynamics-cell-renderers && npm run build",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "vitest run && node scripts/test-tz.mjs",
+    "typecheck": "tsc --noEmit",
+    "typecheck:stories": "tsc -p tsconfig.stories.json",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "storybook": "storybook dev -p 6007",
+    "build-storybook": "storybook build",
+    "clean": "rimraf dist coverage tsconfig.tsbuildinfo .rollup.cache storybook-static"
+  },
+  "dependencies": {
+    "@dataverse-kit/design-tokens": "^0.4.0",
+    "@dataverse-kit/fluent-theme": "^0.3.2",
+    "@khester/dynamics-cell-renderers": "^1.2.1",
+    "@khester/dynamics-utils": "^1.2.1"
+  },
+  "peerDependencies": {
+    "@fluentui/react": "^8.115.6",
+    "@fluentui/react-components": "^9.46.2",
+    "@fluentui/react-icons": "^2.0.239",
+    "react": ">=16.14.0 <19",
+    "react-dom": ">=16.14.0 <19"
+  },
+  "peerDependenciesMeta": {
+    "@fluentui/react-components": {
+      "optional": true
+    },
+    "@fluentui/react-icons": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@fluentui/react-components": "^9.46.2",
+    "@fluentui/react-icons": "^2.0.239",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@storybook/addon-docs": "^10.4.4",
+    "@storybook/react-vite": "^10.4.4",
+    "@testing-library/react": "^14.0.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.7.0",
+    "jsdom": "^25.0.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.6.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "storybook": "^10.4.4",
+    "typescript": "^5.3.3",
+    "vite": "^7.3.5",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

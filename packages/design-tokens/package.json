@@ -1,0 +1,42 @@
+{
+  "name": "@dataverse-kit/design-tokens",
+  "version": "0.4.0",
+  "license": "MIT",
+  "description": "Canonical Dynamics 365 design tokens (colors, spacing, typography, radius, layout) — pure-TS, zero-dependency. The single source consumed by surface-kit, reusable-components, and client projects.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "dynamics-365",
+    "design-tokens",
+    "power-platform",
+    "fluent"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.3"
+  }
+}

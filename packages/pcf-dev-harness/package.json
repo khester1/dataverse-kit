@@ -1,0 +1,72 @@
+{
+  "name": "@dataverse-kit/pcf-dev-harness",
+  "version": "0.2.0",
+  "license": "MIT",
+  "description": "Shared dev harness for PCF controls: a control-agnostic sandbox-style shell (form-factor / properties / data-input panel) plus a Vite dev-server proxy that streams real Dataverse data with an auto-refreshed Azure-CLI token — the token stays server-side. Split into a browser `./shell` entry and a Node `./node` entry.",
+  "type": "module",
+  "exports": {
+    "./shell": {
+      "types": "./dist/shell.d.ts",
+      "import": "./dist/shell.mjs",
+      "require": "./dist/shell.cjs"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "import": "./dist/node.mjs",
+      "require": "./dist/node.cjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "shell": [
+        "./dist/shell.d.ts"
+      ],
+      "node": [
+        "./dist/node.d.ts"
+      ]
+    }
+  },
+  "bin": {
+    "pcf-dev-token": "./get-token.cjs"
+  },
+  "files": [
+    "dist",
+    "get-token.cjs"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "clean": "rimraf dist coverage tsconfig.tsbuildinfo"
+  },
+  "_comment_peers": "react is widened to >=16.14.0 <19 so React-16 controls (pcf-field, and any control-type=\"standard\" control that must also run in the canvas runtime) can install this. The shell is genuinely React-16-safe: it uses only useState / FC / ReactNode / Dispatch / SetStateAction / CSSProperties, all present in @types/react@16.14. Before this, `create-dynamics-app --artifact pcf-field` + a bare `npm install` hit a hard ERESOLVE.",
+  "peerDependencies": {
+    "react": ">=16.14.0 <19",
+    "react-dom": ">=16.14.0 <19",
+    "vite": "^5.0.0 || ^6.0.0 || ^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.45",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

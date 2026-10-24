@@ -1,0 +1,48 @@
+{
+  "name": "@dataverse-kit/fluent-theme",
+  "version": "0.3.2",
+  "license": "MIT",
+  "description": "The Dynamics CE Fluent UI v9 themes, in one place: the classic `dynamicsBrandRamp` (#0078d4, 60/70/80 pinned to the @dataverse-kit/design-tokens brand triad) with its light/dark builders, and `dynamicsCeTheme`, the measured model-driven 'new look' whose colours, shadows and radii are stock Fluent 2 web light (brand #0f6cbd). Consumed by grid-kit/v9, surface-kit/v9 and agent-kit.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "clean": "rimraf dist coverage tsconfig.tsbuildinfo"
+  },
+  "dependencies": {
+    "@dataverse-kit/design-tokens": "^0.4.0"
+  },
+  "peerDependencies": {
+    "@fluentui/react-components": "^9.46.2"
+  },
+  "devDependencies": {
+    "@fluentui/react-components": "^9.46.2",
+    "rimraf": "^5.0.5",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

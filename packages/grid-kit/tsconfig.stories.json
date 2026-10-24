@@ -1,0 +1,19 @@
+{
+  // Non-emitting whole-package check: typechecks stories + the .storybook config,
+  // which the build tsconfig deliberately excludes (the Storybook Vite builder
+  // does no typechecking of its own). The `@khester/*` path aliases are inherited
+  // from ./tsconfig.json (→ dist), matching how Storybook's vite resolves them.
+  // Run via `npm run typecheck:stories`.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "incremental": false,
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "rootDir": "."
+  },
+  "include": ["src/**/*", ".storybook/**/*"],
+  "exclude": ["dist"]
+}

@@ -1,0 +1,23 @@
+{
+  // Non-emitting whole-package check: typechecks the stories AND the .storybook config,
+  // which the build tsconfig deliberately excludes. Run via `npm run typecheck:stories`.
+  // Mirrors surface-kit's, including `rootDir: "."` — without it the .storybook files sit
+  // outside the build tsconfig's `rootDir: "src"` and every one is a TS6059.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "incremental": false,
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "rootDir": ".",
+    "paths": {
+      "@dataverse-kit/design-tokens": ["../design-tokens/dist"],
+      "@dataverse-kit/fluent-theme": ["../fluent-theme/dist"],
+      "@dataverse-kit/surface-kit/v9": ["../surface-kit/dist/v9"]
+    }
+  },
+  "include": ["src/**/*", ".storybook/**/*"],
+  "exclude": ["dist"]
+}

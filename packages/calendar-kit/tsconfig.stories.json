@@ -1,0 +1,15 @@
+{
+  // Non-emitting whole-package check: stories, tests and .storybook, which the build tsconfig
+  // excludes (neither Storybook's Vite builder nor vitest typechecks). Run: npm run typecheck:stories
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "rootDir": ".",
+    "types": ["vitest/globals"]
+  },
+  "include": ["src/**/*", ".storybook/**/*", "vitest.setup.ts"],
+  "exclude": ["dist"]
+}

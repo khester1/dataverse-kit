@@ -1,0 +1,114 @@
+{
+  "name": "@dataverse-kit/calendar-kit",
+  "version": "0.3.0",
+  "license": "MIT",
+  "description": "A calendar for the Microsoft stack, built on FullCalendar v7 (MIT views only). Fed plain event objects, it knows nothing about Dataverse; ./core holds the date rules measured against a live org (three DateTime behaviours, Web API vs form-parameter formats, user time zone), and ./adapters/pcf-dataset maps a PCF dataset onto it. The root entry is Fluent-free (for Power Pages); ./v9 adds Fluent UI v9 styling.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.mjs",
+      "require": "./dist/core.cjs"
+    },
+    "./dataverse": {
+      "types": "./dist/dataverse.d.ts",
+      "import": "./dist/dataverse.mjs",
+      "require": "./dist/dataverse.cjs"
+    },
+    "./adapters/pcf-dataset": {
+      "types": "./dist/pcf-dataset.d.ts",
+      "import": "./dist/pcf-dataset.mjs",
+      "require": "./dist/pcf-dataset.cjs"
+    },
+    "./adapters/code-app": {
+      "types": "./dist/code-app.d.ts",
+      "import": "./dist/code-app.mjs",
+      "require": "./dist/code-app.cjs"
+    },
+    "./adapters/portal": {
+      "types": "./dist/portal.d.ts",
+      "import": "./dist/portal.mjs",
+      "require": "./dist/portal.cjs"
+    },
+    "./v9": {
+      "types": "./dist/v9.d.ts",
+      "import": "./dist/v9.mjs",
+      "require": "./dist/v9.cjs"
+    },
+    "./fake": {
+      "types": "./dist/fake.d.ts",
+      "import": "./dist/fake.mjs",
+      "require": "./dist/fake.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css",
+    "./dist/index.mjs",
+    "./dist/index.cjs",
+    "./dist/v9.mjs",
+    "./dist/v9.cjs"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "postbuild": "node scripts/assert-entry-boundaries.mjs",
+    "test": "node scripts/test-in-zones.mjs",
+    "test:once": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "typecheck:stories": "tsc -p tsconfig.stories.json",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "storybook": "storybook dev -p 6013",
+    "build-storybook": "storybook build",
+    "clean": "rimraf dist coverage tsconfig.tsbuildinfo storybook-static"
+  },
+  "dependencies": {
+    "@fullcalendar/react": "~7.1.0",
+    "temporal-polyfill": "^1.0.5"
+  },
+  "peerDependencies": {
+    "@fluentui/react-components": "^9.46.2",
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@fluentui/react-components": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@fluentui/react-components": "^9.46.2",
+    "@storybook/addon-docs": "^10.4.4",
+    "@storybook/react-vite": "^10.4.4",
+    "@testing-library/react": "^14.0.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.7.0",
+    "jsdom": "^25.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "storybook": "^10.4.4",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.3",
+    "vite": "^7.3.5",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

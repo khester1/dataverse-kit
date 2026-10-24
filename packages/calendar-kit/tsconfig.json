@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    // NOT composite: tsup emits the dts and cannot drive a composite project (as agent-kit).
+    "composite": false,
+    "incremental": false,
+    "noEmit": false,
+    "jsx": "react-jsx",
+    // ★ Set here so a future `paths` entry resolves against THIS package (see agent-kit's note:
+    //   inheriting the root baseUrl silently kills sibling path aliases).
+    "baseUrl": "."
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist", "**/*.test.*", "**/*.spec.*", "**/*.stories.*", "**/__tests__/**"]
+}

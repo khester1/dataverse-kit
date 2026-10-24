@@ -1,0 +1,47 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    // NOT composite: tsup emits the dts and cannot drive a composite project.
+    // Joins the workspace via `paths`, not the `references` graph — same as surface-kit.
+    "composite": false,
+    "incremental": false,
+    "noEmit": false,
+    "jsx": "react-jsx",
+    // ★ baseUrl MUST be set here. `paths` resolve against baseUrl, and a package that does
+    // not set one inherits the ROOT tsconfig's — so "../fluent-theme/dist" would resolve
+    // relative to the repo root (msft/03-frontend/fluent-theme, which does not exist), the
+    // entries would be DEAD, and resolution would fall through to the node_modules symlink.
+    // surface-kit has exactly that latent bug; it is masked because its sibling happens to
+    // be built first. MEASURED here by deleting the sibling dists.
+    "baseUrl": ".",
+    // Siblings resolve to their BUILT output, matching grid-kit. Pointing at `src` instead
+    // is not an option: `rootDir: "src"` + `declaration` rejects any file outside it with
+    // TS6059, which is what makes the `prebuild` script below load-bearing rather than
+    // decorative.
+    //
+    // ★ `npm run build --workspaces` iterates ALPHABETICALLY, not topologically, and
+    //   `agent-kit` sorts FIRST of every package in this repo — ahead of both of these. The
+    //   root `postinstall` runs that build, so without `prebuild` a clean-clone `npm install`
+    //   fails. surface-kit escapes this only because `design-tokens` happens to sort before
+    //   it; agent-kit breaks that accident.
+    "paths": {
+      "@dataverse-kit/design-tokens": ["../design-tokens/dist"],
+      "@dataverse-kit/fluent-theme": ["../fluent-theme/dist"],
+      "@dataverse-kit/surface-kit/v9": ["../surface-kit/dist/v9"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "dist",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/*.stories.*",
+    "**/_storybook/**",
+    "**/__tests__/**"
+  ]
+}

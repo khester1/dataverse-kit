@@ -1,0 +1,33 @@
+{
+  "name": "dataverse-kit",
+  "private": true,
+  "description": "Fluent UI component kits and tooling for Dynamics 365 / Dataverse developers",
+  "license": "MIT",
+  "workspaces": [
+    "packages/design-tokens",
+    "packages/fluent-theme",
+    "packages/dynamics-utils",
+    "packages/dynamics-cell-renderers",
+    "packages/surface-kit",
+    "packages/agent-kit",
+    "packages/grid-kit",
+    "packages/calendar-kit",
+    "packages/pcf-dev-harness"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run build -w packages/design-tokens --if-present && npm run build -w packages/fluent-theme --if-present && npm run build -w packages/dynamics-utils --if-present && npm run build -w packages/dynamics-cell-renderers --if-present && npm run build -w packages/surface-kit --if-present && npm run build -w packages/agent-kit --if-present && npm run build -w packages/grid-kit --if-present && npm run build -w packages/calendar-kit --if-present && npm run build -w packages/pcf-dev-harness --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.121",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.5"
+  }
+}

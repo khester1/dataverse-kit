@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "noEmit": false,
+    "paths": {
+      "@khester/dynamics-utils": ["../dynamics-utils/dist"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist", "**/*.test.*", "**/*.spec.*", "**/*.stories.*"]
+}

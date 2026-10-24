@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    // NOT composite: like surface-kit, this package builds + emits dts via tsup, which
+    // cannot drive a composite project. It joins the workspace via `paths`, not `references`.
+    "composite": false,
+    "incremental": false,
+    "noEmit": false,
+    // Resolve the canonical token package to its SOURCE. This is what makes the build
+    // order-independent: `npm run build --workspaces` iterates alphabetically, not
+    // topologically, so a package must never require a sibling's dist to typecheck.
+    "paths": {
+      "@dataverse-kit/design-tokens": ["../design-tokens/src"],
+      "@dataverse-kit/design-tokens/*": ["../design-tokens/src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist", "**/*.test.*", "**/*.spec.*", "**/__tests__/**"]
+}

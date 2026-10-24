@@ -1,0 +1,48 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Welcome" />
+
+# Agent Kit
+
+**Fluent UI v9 conversational and agent surfaces for Dynamics 365** — styled as Dynamics CE, hostable
+in a custom page, a static web app, or a PCF control.
+
+`@dataverse-kit/agent-kit` · [npm](https://www.npmjs.com/package/@dataverse-kit/agent-kit)
+
+---
+
+## What you are looking at
+
+This Storybook is the **agent / chat UI kit**, not the grid kit or the surface kit. Each package
+publishes its own Storybook to its own Chromatic project, and baselines are never shared.
+
+{/* ★ A LIST, NOT A TABLE, AND ON PURPOSE. Storybook 10 renders MDX v3 WITHOUT remark-gfm, so a
+    GFM table renders as literal pipes in a paragraph — measured on this page 2026-09-25. Nothing
+    errors; it just looks broken. Use tables here only once remark-gfm is wired into
+    addon-docs' mdxCompileOptions. */}
+
+- **Conversation** — the transcript: `MessageList`, `MessageBubble`, `Composer`, `StreamingText`,
+  day dividers, empty and error states
+- **Grounding** — citations and provenance: `CitationChip`, `SourceCard`, `AnswerWithCitations`,
+  `ProviderAttribution`
+- **Actions** — approval and tool-call cards. The kit renders them; it never runs the tool
+- **Shell** — the Teams-like frame: rail, conversation list, header, right pane
+- **Agent ops** — availability, agent picker, run history, usage, throttling
+- **Foundation** — the theme, the seam, and the id-prefix isolation a PCF host needs
+
+## Three things worth knowing before you copy anything
+
+**The kit ships no transport.** It exposes an `IAgentService` seam and a `MockAgentService`. Foundry,
+Copilot Studio and broker adapters live in the consuming app, because that is where credentials live.
+The seam has no write method and no `apiKey` field, and both are enforced by tests.
+
+**Every story renders inside `AgentKitHostProvider`.** That is deliberate — the decorator is the
+pattern a host should copy, so it *is* the pattern. Use the theme toolbar to switch Dynamics light,
+Dynamics dark, and a non-Dynamics host brand, which is how you see whether host theming is actually
+being honoured rather than hard-coded.
+
+**In a PCF control you need two things the browser does not need.** Pass an isolated
+`targetDocument` (Fluent v9's tabster is a per-window singleton and a Dynamics form's copy is 8.2.0,
+which predates the API a bundled control calls), and set `moduleResolution: "bundler"` in your
+tsconfig or three of the four subpaths will not resolve. Both are measured and written up in the
+package README.

@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "noEmit": false,
+    "paths": {
+      "@khester/dynamics-utils": ["../dynamics-utils/dist"],
+      "@khester/dynamics-cell-renderers": ["../dynamics-cell-renderers/dist"],
+      "@dataverse-kit/fluent-theme": ["../fluent-theme/dist"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist", "**/*.test.*", "**/*.spec.*", "**/*.stories.*", "**/_storybook/**", "**/__tests__/**"]
+}

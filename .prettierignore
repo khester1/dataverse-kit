@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+build/
+coverage/
+storybook-static/
+
+# Generated files
+*.min.js
+*.min.css
+*.map
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+.rollup.cache/
+.nyc_output/
+
+# Temporary
+*.tmp
+*.temp
+
+# Template files with Handlebars syntax
+**/templates/**/client-project-template/**
+**/templates/**/*.template.json
+**/templates/**/*.template.js
+**/templates/**/*.template.ts
+**/templates/**/*.template.tsx
+**/templates/**/*.template.html
+**/templates/**/*.hbs
+**/templates/**/*.handlebars
+
+# CLI template directories
+packages/create-app/templates/*/src/client-project-template/
+packages/create-app/templates/*/config/environments/template.json

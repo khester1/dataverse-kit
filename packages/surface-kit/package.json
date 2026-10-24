@@ -1,0 +1,95 @@
+{
+  "name": "@dataverse-kit/surface-kit",
+  "version": "0.5.2",
+  "license": "MIT",
+  "description": "Shared, responsive surfaces / containers / layouts for Dynamics 365. Form shells, sections, tabs, and overlay surfaces (Dialog/Modal/Panel/Callout/Tooltip) that match Dynamics CE and host grid-kit grids, in both Fluent UI v8 (the default `.` entry) and Fluent UI v9 (the `./v9` entry). The pure-TS ./core (sizing) and ./responsive (breakpoint builders) subpaths are framework-agnostic and shared by both skins and the export-engine codegen.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.mjs",
+      "require": "./dist/core.cjs"
+    },
+    "./responsive": {
+      "types": "./dist/responsive.d.ts",
+      "import": "./dist/responsive.mjs",
+      "require": "./dist/responsive.cjs"
+    },
+    "./v9": {
+      "types": "./dist/v9.d.ts",
+      "import": "./dist/v9.mjs",
+      "require": "./dist/v9.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "postbuild": "node scripts/assert-no-react.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "typecheck:stories": "tsc -p tsconfig.stories.json",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "storybook": "storybook dev -p 6009",
+    "build-storybook": "storybook build",
+    "clean": "rimraf dist coverage tsconfig.tsbuildinfo storybook-static"
+  },
+  "dependencies": {
+    "@dataverse-kit/design-tokens": "^0.4.0",
+    "@dataverse-kit/fluent-theme": "^0.3.2"
+  },
+  "peerDependencies": {
+    "@fluentui/react": "^8.115.6",
+    "@fluentui/react-components": "^9.46.2",
+    "@fluentui/react-icons": "^2.0.239",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@fluentui/react-components": {
+      "optional": true
+    },
+    "@fluentui/react-icons": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@fluentui/react": "^8.115.6",
+    "@fluentui/react-components": "^9.46.2",
+    "@fluentui/react-icons": "^2.0.239",
+    "@storybook/addon-docs": "^10.4.4",
+    "@storybook/react-vite": "^10.4.4",
+    "@testing-library/react": "^14.0.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.7.0",
+    "jsdom": "^25.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "storybook": "^10.4.4",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.3",
+    "vite": "^7.3.5",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

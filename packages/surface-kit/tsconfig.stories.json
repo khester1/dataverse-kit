@@ -1,0 +1,25 @@
+{
+  // Non-emitting whole-package check: typechecks stories + the .storybook config +
+  // the adapters/__compat__ type-level tests, which the build tsconfig deliberately
+  // excludes. Carries the grid-kit (→ dist, how Storybook's vite resolves it) and
+  // form-runtime (→ src, types-only) aliases that the build tsconfig must NOT have.
+  // Run via `npm run typecheck:stories`.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": false,
+    "incremental": false,
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "rootDir": ".",
+    "paths": {
+      "@dataverse-kit/grid-kit": ["../grid-kit/dist"],
+      "@dataverse-kit/grid-kit/*": ["../grid-kit/dist/*"],
+      "@dataverse-kit/design-tokens": ["../design-tokens/src"],
+      "@dataverse-kit/design-tokens/*": ["../design-tokens/src/*"]
+    }
+  },
+  "include": ["src/**/*", ".storybook/**/*"],
+  "exclude": ["dist"]
+}

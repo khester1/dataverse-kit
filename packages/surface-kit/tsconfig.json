@@ -1,0 +1,35 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    // NOT composite (unlike grid-kit's rollup build): surface-kit builds + emits dts
+    // via tsup, which can't drive a composite project. It joins the workspace via the
+    // root `paths` alias instead of the `references` graph. Override the root's
+    // composite/incremental so tsup's dts pass is happy.
+    "composite": false,
+    "incremental": false,
+    "noEmit": false,
+    "jsx": "react-jsx",
+    // The one cross-package src import surface-kit makes: resolve the canonical token
+    // package to its source so typecheck (and tsup's dts pass) don't require it prebuilt.
+    "paths": {
+      "@dataverse-kit/design-tokens": ["../design-tokens/src"],
+      "@dataverse-kit/design-tokens/*": ["../design-tokens/src/*"],
+      "@dataverse-kit/fluent-theme": ["../fluent-theme/src"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "dist",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/*.stories.*",
+    "**/_storybook/**",
+    "**/__tests__/**",
+    "**/__compat__/**"
+  ]
+}

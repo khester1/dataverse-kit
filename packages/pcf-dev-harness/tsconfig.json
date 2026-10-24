@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    // NOT composite: tsup drives the build + dts emit and can't run a composite project.
+    // Override the root's composite/incremental so tsup's dts pass is happy (mirrors surface-kit).
+    "composite": false,
+    "incremental": false,
+    "noEmit": false,
+    "jsx": "react-jsx"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist", "**/*.test.*", "**/*.spec.*"]
+}
