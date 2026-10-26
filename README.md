@@ -1,5 +1,7 @@
 # dataverse-kit
 
+**See them running → [components.kylehester.dev](https://components.kylehester.dev)**
+
 Fluent UI component kits and tooling for developers building on **Dynamics 365 / Dataverse** and
 **Power Platform**: grids, form surfaces, agent chat surfaces, a calendar, design tokens and a PCF dev
 harness. Every package here is published on npm, for use in model-driven apps, PCF controls, custom
@@ -23,8 +25,19 @@ framework-agnostic `./core` entries, so the skins never duplicate it.
 
 ## See them running
 
+- **[components.kylehester.dev](https://components.kylehester.dev)**: a curated Storybook of these kits
+  in the Dynamics look, shown beside screenshots of a real org, with interaction tests you can watch run.
 - **[Dataverse UI Gallery](https://gallery.kylehester.dev)**: controls and apps built on these kits,
   each with a live demo and a one-click deploy to your own org.
+
+## Why a component library, and what it changed
+
+- **One source, reused everywhere.** The same Dynamics-faithful components serve PCF controls, custom
+  pages, Power Pages and a gallery of ~37 controls, instead of a fresh copy for each.
+- **Measured against a real org.** Forms, tab layouts and the nested grid in a form section are built to
+  measurements taken from a live Dynamics org, not from memory.
+- **Behaviour tested in a browser.** Editing, lookups, keyboard navigation, filters and export are
+  exercised by tests in a real browser.
 
 ## Develop
 
